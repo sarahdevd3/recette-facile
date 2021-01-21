@@ -64,8 +64,8 @@
 
 
     $resultat = $prepare->rowCount(); // rowCount() nécessite PDO::MYSQL_ATTR_FOUND_ROWS => true
-    $lastInsertedpodcastsId = $connexion->lastInsertId(); // on récupère l'id automatiquement créé par SQL
-    print_r([$requete, $resultat, $lastInsertedpodcastsId]); // debug & vérification
+    $lastInsertedId = $connexion->lastInsertId(); // on récupère l'id automatiquement créé par SQL
+    print_r([$requete, $resultat, $lastInsertedId]); // debug & vérification
 
     //Requête de modification
     $requete = "UPDATE `recettes`
@@ -83,9 +83,9 @@
     $requete = "DELETE FROM `recettes`
                 WHERE ((`recette_id` = :recette_id));";
     $prepare = $connexion->prepare($requete);
-    $prepare->execute(array($lastInsertedpodcastsId)); // on lui passe l'id tout juste créé
+    $prepare->execute(array($lastInsertedId)); // on lui passe l'id tout juste créé
     $resultat = $prepare->rowCount();
-    print_r([$requete, $resultat, $lastInsertedpodcastsId]); // debug & vérification
+    print_r([$requete, $resultat, $lastInsertedId]); // debug & vérification
 
   } catch (PDOException $e) {
 
